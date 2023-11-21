@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void multiplicacion_matrices(int matriz1[][30], int matriz2[][30], int resultado[][30], int filas1, int columnas1, int columnas2) {
+    for (int i = 0; i < filas1; i++) {
+        for (int j = 0; j < columnas2; j++) {
+            resultado[i][j] = 0;
+            for (int k = 0; k < columnas1; k++) {
+                resultado[i][j] += matriz1[i][k] * matriz2[k][j];
+            }
+        }
+    }
+}
+
+void llenar_matriz_aleatoria(int matriz[][30], int filas, int columnas) {
+    srand(time(NULL));
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] = rand() % 10;
+        }
+    }
+}
+
+void imprimir_matriz(int matriz[][30], int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matrizA[30][30], matrizB[30][30], resultado[30][30];
+    int filas = 30, columnas = 30;
+    char opcion;
+
+    llenar_matriz_aleatoria(matrizA, filas, columnas);
+    llenar_matriz_aleatoria(matrizB, filas, columnas);
+
+    printf("Matriz A:\n");
+    imprimir_matriz(matrizA, filas, columnas);
+    printf("\nMatriz B:\n");
+    imprimir_matriz(matrizB, filas, columnas);
+
+    clock_t start = clock();
+    multiplicacion_matrices(matrizA, matrizB, resultado, filas, columnas, columnas);
+    clock_t end = clock();
+
+    printf("\nResultado:\n");
+    imprimir_matriz(resultado, filas, columnas);
+
+    double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000;
+    printf("\nTiempo de ejecucion: %.2f milisegundos\n", time_taken);
+
+    return 0;
+}
