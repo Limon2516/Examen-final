@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Busqueda Secuencial
 int busquedaSecuencial(int arr[], int n, int numAleatorio) {
     for (int i = 0; i < n; i++) {
         if (arr[i] == numAleatorio) {
@@ -12,7 +11,6 @@ int busquedaSecuencial(int arr[], int n, int numAleatorio) {
     return -1;
 }
 
-// Busqueda Binaria
 int busquedaBinaria(int arr[], int first, int last, int numAleatorio) {
     if (first > last) {
         return -1;
